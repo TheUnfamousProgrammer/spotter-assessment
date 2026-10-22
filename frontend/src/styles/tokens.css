@@ -1,0 +1,49 @@
+/* Design tokens: the only place raw colors, sizes and fonts are defined. */
+:root {
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --surface-2: #f7f9fb;
+  --border: #e2e7ee;
+  --border-strong: #cdd5df;
+  --ink: #0f1a2a;
+  --ink-2: #4a5768;
+  --ink-3: #8a96a6;
+  --accent: #2350d8;
+  --accent-hover: #1b41b5;
+  --accent-soft: #e9eefc;
+  --danger: #c62828;
+  --danger-soft: #fdecec;
+
+  --shadow-sm: 0 1px 2px rgb(15 26 42 / 0.06);
+  --shadow-md: 0 4px 16px rgb(15 26 42 / 0.10);
+  --focus: 0 0 0 3px rgb(35 80 216 / 0.25);
+
+  /* Risk scale, index = level (0 Low … 4 No Travel). Also read by the map. */
+  --risk-0: #1f9d63;
+  --risk-1: #e0a800;
+  --risk-2: #f06d1a;
+  --risk-3: #d42a2a;
+  --risk-4: #6c1fae;
+
+  /* Unselected routes, like Google Maps alternatives. */
+  --route-alt: #9aa8bd;
+}

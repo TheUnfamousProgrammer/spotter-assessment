@@ -1,0 +1,519 @@
+/* Page layout and screen-specific pieces, built on tokens.css and ui.css.
+   The layout follows Google Maps directions: a white side panel with stacked
+   stops and a route list, and a full-height map with floating controls. */
+.app {
+  display: flex;
+  height: 100dvh;
+}
+
+.sidebar {
+  width: 408px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4);
+  overflow-y: auto;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  z-index: 1;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.brand h1 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brand p {
+  font-size: var(--text-sm);
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--risk-0) 0 33%, var(--risk-1) 33% 66%, var(--risk-3) 66%);
+}
+
+.hint {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+/* Search: stacked stops with a swap button */
+.trip-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.stops {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.stop-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stop-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2.5px solid var(--ink-2);
+}
+
+.stop-line {
+  height: 22px;
+  border-left: 2px dotted var(--ink-3);
+}
+
+.stop-pin {
+  width: 12px;
+  height: 12px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--danger);
+}
+
+.stop-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: var(--text-lg);
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: var(--surface-2);
+}
+
+.icon-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.place {
+  position: relative;
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 5;
+  margin: 0;
+  padding: var(--space-1) 0;
+  list-style: none;
+  box-shadow: var(--shadow-md);
+}
+
+.suggestions li {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.suggestions li:hover,
+.suggestions li[aria-selected="true"] {
+  background: var(--surface-2);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.input-suffix {
+  position: relative;
+}
+
+.input-suffix span {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+  pointer-events: none;
+}
+
+/* Route list */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.route-skeleton {
+  height: 96px;
+}
+
+.route-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.route-row {
+  border-bottom: 1px solid var(--border);
+  border-left: 4px solid transparent;
+}
+
+.route-row.selected {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.route-main {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3);
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.route-main:focus-visible {
+  outline: none;
+  box-shadow: inset var(--focus);
+}
+
+.route-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: var(--text-sm);
+}
+
+.route-via {
+  font-size: var(--text-md);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.route-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.route-time {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.route-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0 var(--space-3) var(--space-3);
+}
+
+.why {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--accent);
+}
+
+/* Hazard stretches on the selected route */
+.hazards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+
+.hazards li {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 2px var(--space-2);
+  padding: var(--space-2);
+  border-left: 3px solid var(--risk);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.hazards li > .muted {
+  grid-column: 2;
+}
+
+.hazard-reason {
+  font-weight: 500;
+}
+
+.hazard-none {
+  font-size: var(--text-sm);
+}
+
+/* Map and overlays */
+.map-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.legend {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  max-width: min(360px, calc(100% - 2 * var(--space-4)));
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.legend summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  cursor: pointer;
+}
+
+.legend table {
+  width: 100%;
+  margin: var(--space-3) 0 var(--space-2);
+  border-collapse: collapse;
+  font-size: var(--text-xs);
+}
+
+.legend th,
+.legend td {
+  padding: 3px var(--space-1);
+  text-align: left;
+}
+
+.legend thead th {
+  color: var(--ink-3);
+  font-weight: 500;
+}
+
+.legend p {
+  font-size: var(--text-xs);
+  line-height: 1.4;
+}
+
+.time-panel {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-5);
+  transform: translateX(-50%);
+  width: min(520px, calc(100% - 2 * var(--space-4)));
+  box-shadow: var(--shadow-md);
+}
+
+.time-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.time-head .muted {
+  margin-left: auto;
+}
+
+.slider {
+  width: 100%;
+  margin: var(--space-3) 0 var(--space-1);
+  accent-color: var(--accent);
+}
+
+.time-scale {
+  display: flex;
+  justify-content: space-between;
+  padding-left: calc(32px + var(--space-3)); /* line up with the slider, past the play button */
+  font-size: var(--text-xs);
+}
+
+/* Start / end markers and route time bubbles, as in Google Maps */
+.marker-start {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 4px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.marker-end {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 4px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--danger);
+  border: 2px solid var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.bubble {
+  padding: 4px var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.bubble.selected {
+  background: var(--accent);
+  color: #fff;
+}
+
+.bubble:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+/* Checkpoint popup */
+.cp-popup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-family: var(--font);
+  font-size: var(--text-sm);
+}
+
+.cp-weather {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: var(--space-1) 0;
+}
+
+.cp-weather div {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: var(--space-2);
+}
+
+.cp-weather dd {
+  margin: 0;
+}
+
+.cp-reason {
+  font-weight: 500;
+}
+
+.maplibregl-popup-content {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-3) var(--space-4);
+}
+
+@media (max-width: 800px) {
+  .app {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .map-wrap {
+    height: 65vh;
+    flex: none;
+  }
+}
+
+/* Truck on the selected route, driven by the forecast slider */
+.truck {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  border: 2px solid var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.time-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.play-btn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.play-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.truck-status {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.stop-marker {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--ink-2);
+  box-shadow: var(--shadow-sm);
+  font-size: 13px;
+  cursor: default;
+}
