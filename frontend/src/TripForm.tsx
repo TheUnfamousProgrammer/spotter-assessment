@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { DEMO_TRIPS, type DemoTrip } from './demoTrips'
 import { PlaceInput } from './PlaceInput'
 import type { TripInput } from './types'
 
@@ -28,6 +29,23 @@ export function TripForm({ loading, onSubmit }: { loading: boolean; onSubmit: (i
       interval_mi: intervalMi,
     })
   }
+
+  function runDemo(trip: DemoTrip) {
+    setOrigin(trip.origin)
+    setDestination(trip.destination)
+    setLeaveNow(false)
+    setDeparture(toLocalInput(new Date(trip.departure)))
+    setLoad(String(trip.load_lb))
+    setIntervalMi(trip.interval_mi)
+    const { origin, destination, departure, load_lb, interval_mi } = trip
+    onSubmit({ origin, destination, departure, load_lb, interval_mi })
+  }
+
+  const now = Date.now()
+  const demos = DEMO_TRIPS.filter((t) => {
+    const at = Date.parse(t.departure)
+    return at > now && at < now + MAX_LEAD_DAYS * 24 * HOUR
+  })
 
   function swap() {
     setOrigin(destination)
@@ -103,6 +121,24 @@ export function TripForm({ loading, onSubmit }: { loading: boolean; onSubmit: (i
       <button className="btn" type="submit" disabled={loading}>
         {loading ? 'Checking routes and weather…' : 'Find safest route'}
       </button>
+      {demos.length > 0 && (
+        <div className="demo-trips">
+          <span className="eyebrow">Demo trips</span>
+          {demos.map((trip) => (
+            <button
+              key={trip.label}
+              type="button"
+              className="demo-chip"
+              disabled={loading}
+              title={trip.note}
+              onClick={() => runDemo(trip)}
+            >
+              <strong>{trip.label}</strong>
+              <span className="muted">{trip.note}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </form>
   )
 }
