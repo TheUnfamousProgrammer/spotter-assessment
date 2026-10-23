@@ -19,7 +19,7 @@ export default function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(input),
       })
-      const data = await res.json().catch(() => ({ error: 'The server sent an unexpected response.' }))
+      const data = await res.json().catch(() => ({ error: `The server sent an unexpected response (HTTP ${res.status}).` }))
       if (!res.ok) throw new Error(data.error ?? 'Something went wrong.')
       setPlan(data)
       setSelected(0)

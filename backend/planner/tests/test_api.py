@@ -79,3 +79,10 @@ def test_label_prefers_a_road_the_other_routes_do_not_use():
     assert routing.label(["I 80", "I 76"], [["I 80", "I 76", "US 20"]]) == "I 80, I 76"
     assert routing.label(["Main Street"], []) == "Main Street"
     assert routing.label([], []) == ""
+
+
+@pytest.mark.parametrize("host", ["routerisk-production.up.railway.app", "localhost"])
+def test_api_answers_json_on_deployed_hosts(host):
+    resp = Client(HTTP_HOST=host).post("/api/plan", "{}", content_type="application/json")
+    assert resp.status_code == 400
+    assert resp.json() == {"error": "Invalid request."}

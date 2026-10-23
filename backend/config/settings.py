@@ -5,9 +5,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-only-not-secret")
 DEBUG = os.environ.get("DEBUG") == "1"
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-if os.environ.get("RAILWAY_PUBLIC_DOMAIN"):
-    ALLOWED_HOSTS.append(os.environ["RAILWAY_PUBLIC_DOMAIN"])
+# Any Railway subdomain (a domain generated after the container started is not in its env),
+# plus extra hosts such as a custom domain: ALLOWED_HOSTS="routerisk.example.com,…".
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".up.railway.app"]
+ALLOWED_HOSTS += [h.strip() for h in os.environ.get("ALLOWED_HOSTS", "").split(",") if h.strip()]
 
 INSTALLED_APPS = []
 MIDDLEWARE = [

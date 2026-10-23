@@ -2,7 +2,7 @@
 
 React + Django app that helps a truck driver pick the safest route for a trip. Enter origin, destination, departure time and load weight. You get three routes scored against the forecast at the hour the truck actually reaches each checkpoint, plus a 0–48 h weather-risk heatmap of the corridor.
 
-**Live:** _add your Render URL_ · **Walkthrough:** _add your Loom URL_
+**Live:** https://spotter-assessment-production-abb1.up.railway.app · **Walkthrough:** _add your Loom URL_
 
 ## How it works
 
@@ -65,7 +65,7 @@ For frontend hot reload, run `npm run dev` in `frontend/` too (it proxies `/api`
 
 ## Deploy (Railway)
 
-The `Dockerfile` builds the React app, then runs Django + gunicorn, which serves both. Railway sets `PORT` and `RAILWAY_PUBLIC_DOMAIN`, and the app reads both.
+The `Dockerfile` builds the React app, then runs Django + gunicorn, which serves both. Railway sets `PORT`, and any `*.up.railway.app` domain is accepted. For a custom domain, set `ALLOWED_HOSTS=your.domain` in the service's variables.
 
 1. Push this repo to GitHub.
 2. In Railway, choose **New Project → Deploy from GitHub repo** and pick it. Railway finds the `Dockerfile` and builds it.
