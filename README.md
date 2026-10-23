@@ -2,7 +2,7 @@
 
 React + Django app that helps a truck driver pick the safest route for a trip. Enter origin, destination, departure time and load weight. You get three routes scored against the forecast at the hour the truck actually reaches each checkpoint, plus a 0–48 h weather-risk heatmap of the corridor.
 
-**Live:** https://spotter-assessment-production-abb1.up.railway.app · **Walkthrough:** _add your Loom URL_
+**Live:** https://spotter-assessment-production-abb1.up.railway.app · **Walkthrough:** https://www.loom.com/share/7cc236b6adad4cc6a435781833d48943
 
 ## How it works
 
