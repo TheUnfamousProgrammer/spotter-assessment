@@ -15,20 +15,20 @@ export interface DemoTrip {
 
 export const DEMO_TRIPS: DemoTrip[] = [
   {
-    label: 'Rapid City → Billings',
+    label: 'Denver → Billings',
     note: 'Severe wind at 45,000 lb, High at 25,000 lb',
-    origin: 'Rapid City, SD',
+    origin: 'Denver, CO',
     destination: 'Billings, MT',
-    departure: '2026-10-23T16:00:00Z',
+    departure: '2026-10-23T12:00:00Z',
     load_lb: 45000,
     interval_mi: 10,
   },
   {
-    label: 'Sacramento → Medford',
-    note: '20 miles of High rain on the alternative',
-    origin: 'Sacramento, CA',
-    destination: 'Medford, OR',
-    departure: '2026-10-22T17:30:00Z',
+    label: 'Salt Lake City → Bozeman',
+    note: 'High snow on one alternative',
+    origin: 'Salt Lake City, UT',
+    destination: 'Bozeman, MT',
+    departure: '2026-10-23T07:30:00Z',
     load_lb: 45000,
     interval_mi: 10,
   },
